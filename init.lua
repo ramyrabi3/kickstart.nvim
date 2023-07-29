@@ -38,8 +38,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -203,7 +203,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -211,7 +211,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -247,7 +247,51 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+vim.o.relativenumber = true
+vim.o.cursorline = true
+vim.o.autoread = true
+vim.o.incsearch = true
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.nowrap = true
+vim.o.expandtab = true
+vim.o.showtabline = true
+vim.o.autowriteall = true
+
+
 -- [[ Basic Keymaps ]]
+
+-- Custom Mappings RR ==============
+-- Tabs 
+vim.keymap.set('n', '<leader>tt', ':tabnew<cr>')
+vim.keymap.set('n', '<leader>te', ':tabedit')
+vim.keymap.set('n', '<leader>tc', ':tabclose<cr>')
+vim.keymap.set('n', '<leader>to', ':tabonly<cr>')
+vim.keymap.set('n', '<leader>tn', ':tabnext<cr>')
+vim.keymap.set('n', '<leader>tp', ':tabprevious<cr>')
+vim.keymap.set('n', '<leader>tf', ':tabfirst<cr>')
+vim.keymap.set('n', '<leader>tl', ':tablast<cr>')
+vim.keymap.set('n', '<leader>tme', ':tabmove<cr>')
+vim.keymap.set('n', '<leader>tmf', ':tabmove 0<cr>')
+vim.keymap.set('n', '<leader>tml', ':-tabmove<cr>')
+vim.keymap.set('n', '<leader>tmr', ':+tabmove<cr>')
+-- use enter to create new lines w/o entering insert mode
+vim.keymap.set('n', '<cr>', 'O<Esc>j')
+-- windows mappings
+-- vim.keymap.del('n', '<C-K>') -- this was used to open the signature / signature_help
+vim.keymap.set('n', '<leader>wwv', ':vsplit %<cr>')
+vim.keymap.set('n', '<leader>wws', ':split %<cr>')
+vim.keymap.set('n', '<leader>wwc', ':hide<cr>')
+vim.keymap.set('n', '<leader>wwo', ':only<cr>')
+vim.keymap.set('n', '<C-H>', '<C-W><C-H>')
+vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
+vim.keymap.set('n', '<C-K>', '<C-W><C-K>') -- not working, need to be investigated
+vim.keymap.set('n', '<C-L>', '<C-W><C-L>')
+-- NERDTree mappings
+vim.keymap.set('n', '<leader>nn', ':NvimTreeToggle<cr>')
+vim.keymap.set('n', '<leader>ff', ':NvimTreeFindFile<cr>')
+
+-- =================================
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -424,16 +468,12 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -463,9 +503,8 @@ mason_lspconfig.setup_handlers {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
     }
-  end
+  end,
 }
 
 -- [[ Configure nvim-cmp ]]
