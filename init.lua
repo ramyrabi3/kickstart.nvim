@@ -260,7 +260,7 @@ vim.o.expandtab = true
 vim.o.showtabline = true
 vim.o.autowriteall = true
 vim.opt.termguicolors = true
-
+vim.opt.wrap = false
 
 -- [[ Basic Keymaps ]]
 
