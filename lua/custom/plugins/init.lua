@@ -18,8 +18,8 @@ return {
       renderer = {
         group_empty = true,
       },
-      filter = {
-        dotfiles = true,
+      filters = {
+        dotfiles = false,
       },
     }
   end,
