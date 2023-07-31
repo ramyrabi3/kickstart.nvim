@@ -261,6 +261,7 @@ vim.o.showtabline = true
 vim.o.autowriteall = true
 vim.opt.termguicolors = true
 vim.opt.wrap = false
+vim.o.swapfile = false
 
 -- [[ Basic Keymaps ]]
 
