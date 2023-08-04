@@ -3,6 +3,8 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  "github/copilot.vim",
+  {
   "nvim-tree/nvim-tree.lua",
   version = "*",
   lazy = false,
@@ -23,4 +25,5 @@ return {
       },
     }
   end,
+  }
 }
